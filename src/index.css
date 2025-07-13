@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+* {
+    font-family: 'Roboto', sans-serif;
+}
+
+.shadow-custom {
+    box-shadow: 0 10px 10px -10px #0000004d;
+}
