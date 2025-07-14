@@ -12,7 +12,6 @@ const Hero = () => {
                     <h2 className="text-4xl uppercase font mt-2">starts here</h2>
                     <p className="text-2xl mt-4">Just answer a few questions to get started.</p>
                 </div>
-                {/* <JacuzziForm /> */}
                 <JacuzziForm />
             </div>
             <div className="absolute -z-10 inset-0 bg-gradient-to-t from-transparent to-white opacity-100"></div>

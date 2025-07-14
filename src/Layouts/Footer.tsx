@@ -1,17 +1,6 @@
-import React from 'react'
-
 const Footer = () => {
     return (
         <div>
-
-            {/* Privacy Notice
- Affiliates
- Terms of Use
- E-Sign Consent
- Contact Us
- Do Not Sell or Share My Personal Information
- Privacy Preferences
- (866) 455-2066 */}
             <footer className="flex flex-col space-y-10 justify-center m-10">
 
                 <nav className="flex max-w-4xl px-8 mx-auto justify-center flex-wrap gap-x-6 gap-y-2 text-gray-500 font-medium">

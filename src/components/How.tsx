@@ -2,14 +2,6 @@ const How = () => {
     return (
         <div className='container max-w-6xl px-10 text-sm mt-4 mx-auto'>
             <h2 className='text-2xl text-center mt-20'>How It Works</h2>
-            {/* <div className="mt-14">
-                <div>
-                    <div className="flex items-center justify-center flex-col">
-                        <img className="w-16" src="pass.png" alt="" />
-                        <p className="my-3">Get a Free Quote</p>
-                    </div>
-                </div>
-            </div> */}
             <ul className="mt-12 flex items-center justify-center gap-8 lg:gap-36 flex-wrap">
                 <li className="items-center gap-2 group relative flex lg:flex-col">
                     <span

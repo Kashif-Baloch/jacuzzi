@@ -1,5 +1,3 @@
-import React from 'react'
-
 const Banner = () => {
     return (
         <div className='container max-w-6xl px-4 mx-auto'>

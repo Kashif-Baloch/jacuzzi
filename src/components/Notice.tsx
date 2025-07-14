@@ -1,5 +1,3 @@
-import React from 'react'
-
 const Notice = () => {
     return (
         <div className='container max-w-6xl px-10 text-sm mt-8 mx-auto'>

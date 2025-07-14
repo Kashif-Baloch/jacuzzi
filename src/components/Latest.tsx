@@ -1,5 +1,3 @@
-import React from 'react'
-
 const Latest = () => {
     return (
         <div className='bg-[#f6f6f6] p-12'>
