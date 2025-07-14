@@ -161,7 +161,6 @@ const JacuzziForm: React.FC = () => {
 
   const validateStep = (step: number): boolean => {
     const newErrors: FormErrors = {};
-
     switch (step) {
       case 1:
         if (!formData.zipCode.trim()) {
@@ -174,9 +173,10 @@ const JacuzziForm: React.FC = () => {
       case 4:
         if (!formData.phoneNumber.trim()) {
           newErrors.phoneNumber = 'Phone number is required';
-        } else if (!/^\(\d{3}\) \d{3}-\d{4}$/.test(formData.phoneNumber.trim())) {
+        } else if (!/^05\d{8}$/.test(formData.phoneNumber.trim())) {
           newErrors.phoneNumber = 'Please enter a valid phone number';
         }
+
 
         if (!formData.email.trim()) {
           newErrors.email = 'Email address is required';
@@ -220,15 +220,8 @@ const JacuzziForm: React.FC = () => {
     setCurrentStep(prev => prev - 1);
   };
 
-  const formatPhoneNumber = (value: string): string => {
-    const numbers = value.replace(/\D/g, '');
-    if (numbers.length <= 3) return numbers;
-    if (numbers.length <= 6) return `(${numbers.slice(0, 3)}) ${numbers.slice(3)}`;
-    return `(${numbers.slice(0, 3)}) ${numbers.slice(3, 6)}-${numbers.slice(6, 10)}`;
-  };
-
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    const formatted = formatPhoneNumber(e.target.value);
+    const formatted = e.target.value.replace(/\D/g, '');
     updateFormData('phoneNumber', formatted);
   };
 
@@ -310,12 +303,6 @@ const JacuzziForm: React.FC = () => {
   if (!isLoaded) {
     return (
       <Loader />
-      // <div className="min-h-screen bg-gray-100 py-8 flex items-center justify-center">
-      //   <div className="text-center">
-      //     <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#00667F] mx-auto"></div>
-      //     <p className="mt-4 text-gray-600">Loading...</p>
-      //   </div>
-      // </div>
     );
   }
 

@@ -8,6 +8,7 @@ export interface DataState {
     handleSubmit?: () => void;
     handlePhoneChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
     projectOptions?: any;
+    validatePhoneNumber?: (value: string) => any;
 }
 
 
