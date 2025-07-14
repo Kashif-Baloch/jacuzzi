@@ -353,30 +353,31 @@ const JacuzziForm: React.FC = () => {
 
         storage.setItem(STORAGE_KEY, '');
         storage.setItem(STEP_KEY, '1');
+        alert('Form submitted successfully!');
+        console.log('Form Data:', formData);
+
+        // Reset form
+        setFormData({
+          zipCode: '',
+          phoneNumber: '',
+          email: '',
+          firstName: '',
+          lastName: '',
+          address: '',
+          isHomeowner: false,
+          projectType: ''
+        });
+        setCurrentStep(5);
       } catch (error) {
         TagManager.dataLayer({
           dataLayer: {
             event: `registration_error_jacuzzi`,
           },
         });
-        console.error('Error clearing saved data:', error);
+        alert('Error submitting data');
+        console.error('Error submitting data:', error);
       }
 
-      alert('Form submitted successfully!');
-      console.log('Form Data:', formData);
-
-      // Reset form
-      setFormData({
-        zipCode: '',
-        phoneNumber: '',
-        email: '',
-        firstName: '',
-        lastName: '',
-        address: '',
-        isHomeowner: false,
-        projectType: ''
-      });
-      setCurrentStep(5);
     }
   };
 
