@@ -1,4 +1,12 @@
 import React, { useState, useEffect, type JSX } from 'react';
+import StepOne from './steps/StepOne';
+import StepTwo from './steps/StepTwo';
+import StepThree from './steps/StepThree';
+import StepFour from './steps/StepFour';
+import FinalStep from './steps/FinalStep';
+import Loader from './loader/Loader';
+import { WEBHOOK_URL } from '../utils/CONSTS';
+import TagManager from 'react-gtm-module';
 
 interface FormData {
   zipCode: string;
@@ -233,13 +241,124 @@ const JacuzziForm: React.FC = () => {
     }
   };
 
-  const handleSubmit = (): void => {
+  // const HandleSubmit = async () => {
+  //   setErrorMsg("");
+  //   try {
+  //     if (currentStep === 1 && fullName.length < 2) {
+  //       setErrorMsg("לפחות 2 תווים");
+  //       return;
+  //     }
+
+  //     if (currentStep === 5 && !regex.test(phoneNumber)) {
+  //       setErrorMsg("אנא הזמן מספר תקין");
+  //       return;
+  //     }
+
+  //     if (currentStep === 5 && !checkbox) {
+  //       setErrorMsg("אנא אשר את התנאים");
+  //       return;
+  //     }
+
+  //     setBtnLoading(true);
+
+  //     if (currentStep === 5) {
+  //       setIsLoading(true);
+
+  //       const payload = {
+  //         fullName,
+  //         income,
+  //         deficiencies,
+  //         otherProblemsPatientSuffers,
+  //         phoneNumber,
+  //         createdAt,
+  //         pageUrl: window.location.href,
+  //       };
+  //       console.log(payload);
+  //       await fetch(WEBHOOK_URL, {
+  //         method: "POST",
+  //         body: JSON.stringify(payload),
+  //       });
+  //       TagManager.dataLayer({
+  //         dataLayer: {
+  //           event: `registration_complete_ashdod-law-tax`,
+  //         },
+  //       });
+  //       localStorage.setItem(
+  //         "formdata",
+  //         JSON.stringify({
+  //           fullName,
+  //           income,
+  //           deficiencies,
+  //           phoneNumber,
+  //           otherProblemsPatientSuffers,
+  //           crime_record,
+  //           createdAt,
+  //           pageUrl: window.location.href,
+  //         })
+  //       );
+  //       // setTimeout(() => {
+  //       // }, 1000);
+  //     } else {
+  //       TagManager.dataLayer({
+  //         dataLayer: {
+  //           event: `step_${currentStep}_complete_ashdod-law-tax`,
+  //         },
+  //       });
+  //     }
+  //     setCurrentStep((prev) => prev + 1);
+  //   } catch (error) {
+  //     console.log("Error: ", error);
+  //     alert("something went wrong while sending data to api");
+  //   } finally {
+  //     setIsLoading(false);
+  //     setBtnLoading(false);
+  //   }
+  // };
+
+  const handleSubmit = async (): Promise<void> => {
     if (validateStep(4)) {
       // Clear saved data on successful submission
       try {
+        // const payload = {
+        //         fullName,
+        //         income,
+        //         deficiencies,
+        //         otherProblemsPatientSuffers,
+        //         phoneNumber,
+        //         createdAt,
+        //         pageUrl: window.location.href,
+        //       };
+        const payload = {
+          zipCode: formData.zipCode,
+          phoneNumber: formData.phoneNumber,
+          email: formData.email,
+          fullName: formData.firstName + " " + formData.lastName,
+          address: formData.address,
+          isHomeowner: formData.isHomeowner,
+          projectType: formData.projectType,
+          createdAt: new Date().toISOString(),
+          pageUrl: window.location.href,
+        };
+
+        await fetch(WEBHOOK_URL, {
+          method: "POST",
+          body: JSON.stringify(payload),
+        });
+
+        TagManager.dataLayer({
+          dataLayer: {
+            event: `registration_complete_jacuzzi`,
+          },
+        });
+
         storage.setItem(STORAGE_KEY, '');
         storage.setItem(STEP_KEY, '1');
       } catch (error) {
+        TagManager.dataLayer({
+          dataLayer: {
+            event: `registration_error_jacuzzi`,
+          },
+        });
         console.error('Error clearing saved data:', error);
       }
 
@@ -272,335 +391,15 @@ const JacuzziForm: React.FC = () => {
   // Show loading state until data is loaded
   if (!isLoaded) {
     return (
-      <div className="min-h-screen bg-gray-100 py-8 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#00667F] mx-auto"></div>
-          <p className="mt-4 text-gray-600">Loading...</p>
-        </div>
-      </div>
+      <Loader />
+      // <div className="min-h-screen bg-gray-100 py-8 flex items-center justify-center">
+      //   <div className="text-center">
+      //     <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#00667F] mx-auto"></div>
+      //     <p className="mt-4 text-gray-600">Loading...</p>
+      //   </div>
+      // </div>
     );
   }
-
-
-  const renderStep1 = (): JSX.Element => (
-    <div className="bg-white max-w-lg mx-auto">
-      <div className="bg-[#00667F] text-white text-center py-4 px-8">
-        <h2 className="text-lg">Get a Free Bathtub Conversion Price Quote</h2>
-      </div>
-
-      <div className="p-8">
-        <div className="text-center mb-6">
-          <h3 className="text-lg font-semibold mb-2">Enter your ZIP Code</h3>
-        </div>
-
-        <div className="space-y-4 flex items-center justify-center flex-col">
-          <div>
-            <input
-              type="text"
-              placeholder="ZIP Code"
-              value={formData.zipCode}
-              onChange={(e) => updateFormData('zipCode', e.target.value)}
-              className={`p-3 text-center border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00667F] ${errors.zipCode ? 'border-red-500' : 'border-gray-300'
-                }`}
-              maxLength={10}
-            />
-            {errors.zipCode && <p className="text-red-500 text-sm mt-1">{errors.zipCode}</p>}
-          </div>
-
-          <button
-            onClick={handleNext}
-            className="w-auto bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 px-12 rounded-lg transition-colors flex items-center justify-center"
-          >
-            GO <span className="ml-2">→</span>
-          </button>
-        </div>
-
-        <div className="mt-6 text-center border-t border-gray-300">
-          <div className="p-4 rounded-lg">
-            <p className="text-2xl text-gray-800">Waiving All Installation Costs*</p>
-            <div className="bg-blue-600 text-white text-xs px-2 py-[2px] rounded-full mt-1 inline-block">PLUS</div>
-            <p className="text-sm text-gray-600 mt-2">No Interest and No Payments for up to 1 Year*</p>
-            <p className="text-xs text-gray-500 mt-1">*If paid in full by end of 12 months</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-
-  const renderStep4 = (): JSX.Element => (
-    <div className="bg-white max-w-md mx-auto">
-      <div className="bg-[#00667F] text-white py-4">
-        <h2 className="text-xl font-semibold text-center">Get a Free Bathtub Conversion Price Quote</h2>
-
-      </div>
-      <div className="mt-3 px-4 w-[94%] mx-auto">
-        <div className="flex justify-between text-xs mb-1">
-          <span>YOUR PROGRESS</span>
-          <span>{getProgressPercentage()}%</span>
-        </div>
-        <div className="w-full bg-teal-400 rounded-full h-2">
-          <div
-            className="bg-[#00667F] h-2 rounded-full transition-all duration-300"
-            style={{ width: `${getProgressPercentage()}%` }}
-          ></div>
-        </div>
-      </div>
-
-      <div className="p-8">
-        <div className="mb-6">
-          <h3 className="text-xl font-semibold mb-2">Last Step!</h3>
-          <p className="text-gray-600 text-sm">Let us know how best to contact you with pricing details:</p>
-        </div>
-
-        <div className="space-y-4">
-          <div>
-            <input
-              type="text"
-              placeholder="Phone Number"
-              value={formData.phoneNumber}
-              onChange={handlePhoneChange}
-              className={`w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00667F] ${errors.phoneNumber ? 'border-red-500' : 'border-gray-300'
-                }`}
-              maxLength={14}
-            />
-            {errors.phoneNumber && <p className="text-red-500 text-sm mt-1">{errors.phoneNumber}</p>}
-          </div>
-
-          <div>
-            <input
-              type="email"
-              placeholder="Email Address"
-              value={formData.email}
-              onChange={(e) => updateFormData('email', e.target.value)}
-              className={`w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00667F] ${errors.email ? 'border-red-500' : 'border-gray-300'
-                }`}
-            />
-            {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
-          </div>
-
-          <div className="flex justify-between mt-2">
-            <button
-              onClick={handleBack}
-              className="flex-1 max-w-fit px-6 bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-3 rounded-lg transition-colors flex items-center justify-center"
-            >
-              <img src="/arrow.png" className='w-4' alt="" />
-            </button>
-            <button
-              onClick={handleSubmit}
-              className="flex-1 bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 max-w-fit px-6 md:px-12 rounded-lg transition-colors flex items-center justify-center"
-            >
-              GET QUOTE <span className="ml-2"><img src="/arrow.png" className="w-4 invert rotate-180" alt="arrow" /></span>
-            </button>
-          </div>
-        </div>
-
-        <div className="mt-6 ">
-          <p className="text-sm text-center text-gray-600 italic">Encrypted form, free and competitive quote</p>
-          <p className="text-xs text-gray-500 mt-3">
-            By clicking "Get Quote", you authorize Jacuzzi or one of its dealers to make marketing calls and texts to the phone number provided for a free estimate and to keep you informed about bath remodeling products and services. You understand they may use auto-dialer, AI, SMS messages, artificial and prerecorded voice messages to contact you. There is no requirement to purchase services. Please see our Privacy Policy and QuintStreet's Terms of Use and be aware that all calls are recorded for quality and safety purposes.
-          </p>
-        </div>
-      </div>
-    </div>
-  );
-
-  const renderStep3 = (): JSX.Element => (
-    <div className="bg-white max-w-md mx-auto">
-      <div className="bg-[#00667F] text-white py-4">
-        <h2 className="text-xl font-semibold text-center">Get a Free Bathtub Conversion Price Quote</h2>
-
-      </div>
-
-      <div className="mt-3 w-[94%] mx-auto px-4">
-        <div className="flex justify-between text-xs mb-1">
-          <span>YOUR PROGRESS</span>
-          <span>{getProgressPercentage()}%</span>
-        </div>
-        <div className="w-full bg-teal-400 rounded-full h-2">
-          <div
-            className="bg-[#00667F] h-2 rounded-full transition-all duration-300"
-            style={{ width: `${getProgressPercentage()}%` }}
-          ></div>
-        </div>
-      </div>
-
-      <div className="p-8">
-        <div className="mb-6">
-          <h3 className="text-xl font-semibold mb-2">Congratulations!</h3>
-          <p className="text-gray-600 text-sm">We've got a bath remodel quote ready for you in Chicago!</p>
-          <p className="text-gray-600 text-sm">Enter your information to get your quote:</p>
-        </div>
-
-        <div className="space-y-4">
-          <div>
-            <input
-              type="text"
-              placeholder="First Name"
-              value={formData.firstName}
-              onChange={(e) => updateFormData('firstName', e.target.value)}
-              className={`w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00667F] ${errors.firstName ? 'border-red-500' : 'border-gray-300'
-                }`}
-            />
-            {errors.firstName && <p className="text-red-500 text-sm mt-1">{errors.firstName}</p>}
-          </div>
-
-          <div>
-            <input
-              type="text"
-              placeholder="Last Name"
-              value={formData.lastName}
-              onChange={(e) => updateFormData('lastName', e.target.value)}
-              className={`w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00667F] ${errors.lastName ? 'border-red-500' : 'border-gray-300'
-                }`}
-            />
-            {errors.lastName && <p className="text-red-500 text-sm mt-1">{errors.lastName}</p>}
-          </div>
-
-          <div>
-            <input
-              type="text"
-              placeholder="Address"
-              value={formData.address}
-              onChange={(e) => updateFormData('address', e.target.value)}
-              className={`w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00667F] ${errors.address ? 'border-red-500' : 'border-gray-300'
-                }`}
-            />
-            {errors.address && <p className="text-red-500 text-sm mt-1">{errors.address}</p>}
-          </div>
-
-          <div className="flex items-center space-x-2">
-            <input
-              type="checkbox"
-              id="homeowner"
-              checked={formData.isHomeowner}
-              onChange={(e) => updateFormData('isHomeowner', e.target.checked)}
-              className="w-4 h-4 text-[#00667F] focus:ring-[#00667F] border-gray-300 rounded"
-            />
-            <label htmlFor="homeowner" className="text-gray-700">I'm a homeowner</label>
-          </div>
-
-          <div className="text-right">
-            <span className="text-[#00667F] text-sm cursor-pointer">Chicago, IL ✏️</span>
-          </div>
-
-          <div className="flex justify-between mt-2">
-            <button
-              onClick={handleBack}
-              className="flex-1 max-w-fit px-6 bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-3 rounded-lg transition-colors flex items-center justify-center"
-            >
-              <img src="/arrow.png" className='w-4' alt="arrow" />
-            </button>
-            <button
-              onClick={handleNext}
-              className="flex-1 bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 max-w-fit px-6 md:px-12 rounded-lg transition-colors flex items-center justify-center"
-            >
-              NEXT <span className="ml-2"> <img src="/arrow.png" className='w-4 rotate-180 invert' alt="arrow" /></span>
-            </button>
-          </div>
-        </div>
-
-        <div className="mt-6 text-center">
-          <p className="text-sm text-gray-600 italic">Encrypted form, free and competitive quote</p>
-        </div>
-      </div>
-    </div>
-  );
-
-  const renderStep2 = (): JSX.Element => (
-    <div className="bg-white max-w-md mx-auto">
-      <div className="bg-[#00667F] text-white py-4">
-        <h2 className="text-lg font-semibold text-center">Get a Free Bathtub Conversion Price Quote</h2>
-      </div>
-
-      <div className="mt-3 w-[94%] mx-auto px-4">
-        <div className="flex justify-between text-xs mb-1">
-          <span>YOUR PROGRESS</span>
-          <span>{getProgressPercentage()}%</span>
-        </div>
-        <div className="w-full bg-teal-400 rounded-full h-2">
-          <div
-            className="bg-[#00667F] h-2 rounded-full transition-all duration-300"
-            style={{ width: `${getProgressPercentage()}%` }}
-          ></div>
-        </div>
-      </div>
-
-      <div className="p-8">
-        <div className="text-center mb-6">
-          <h3 className="text-lg font-semibold mb-4">Tell us about the project you're working on:</h3>
-        </div>
-
-        <div className="space-y-3">
-          {projectOptions.map((option, index) => (
-            <div key={option.id} className="relative">
-              <button
-                onClick={() => updateFormData('projectType', option.id)}
-                className={`w-full p-4 text-left rounded-lg border-2 transition-colors flex items-center justify-between ${(formData.projectType === option.id || (index === 0 && !formData.projectType))
-                  ? 'bg-[#00667F] text-white border-[#00667F]'
-                  : 'bg-blue-50 text-gray-700 border-blue-200 hover:border-blue-300'
-                  }`}
-              >
-                <span className="font-medium">{option.label}</span>
-                {(formData.projectType === option.id || (index === 0 && !formData.projectType)) && (
-                  <span className="text-white">✓</span>
-                )}
-              </button>
-            </div>
-          ))}
-
-          {errors.projectType && <p className="text-red-500 text-sm mt-2">{errors.projectType}</p>}
-        </div>
-
-        <div className="flex justify-between mt-8">
-          <button
-            onClick={handleBack}
-            className="flex-1 max-w-fit bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-3 px-6 rounded-lg transition-colors flex items-center justify-center"
-          >
-            <img className="w-4" src="/arrow.png" alt="arrow" />
-          </button>
-          <button
-            onClick={handleNext}
-            className="flex-1 max-w-fit px-6 md:px-12 bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 rounded-lg transition-colors flex items-center justify-center"
-          >
-            NEXT <span className="ml-2"><img className="rotate-180 w-4 invert" src="/arrow.png" alt="arrow" /></span>
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-
-  const renderStep5 = (): JSX.Element => (
-    <div className="bg-white max-w-lg mx-auto">
-      <div className="bg-[#00667F] text-white text-center py-4 px-8">
-        <h2 className="text-lg">Get a Free Bathtub Conversion Price Quote</h2>
-      </div>
-
-      <div className="p-8">
-        <div className="text-center mb-6">
-          <h1 className='font-semibold text-2xl'>
-            Welcome Back
-          </h1>
-          <p className='text-gray-700 mt-5 w-[60%] mx-auto'>
-            It looks like you just submitted your information a moment ago.
-          </p>
-
-          <button className="mt-5 bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors flex items-center justify-center w-[60%] mx-auto">
-            See Your Matches
-          </button>
-        </div>
-
-        <div className="mt-6 text-center border-t border-gray-300">
-          <div className="p-4 rounded-lg">
-            <p className="text-2xl text-gray-800">Waiving All Installation Costs*</p>
-            <div className="bg-blue-600 text-white text-xs px-2 py-[2px] rounded-full mt-1 inline-block">PLUS</div>
-            <p className="text-sm text-gray-600 mt-2">No Interest and No Payments for up to 1 Year*</p>
-            <p className="text-xs text-gray-500 mt-1">*If paid in full by end of 12 months</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-
 
   return (
     <div className='mt-10'>
@@ -613,11 +412,19 @@ const JacuzziForm: React.FC = () => {
           </div>
 
           <div className="flex-1">
-            {currentStep === 1 && renderStep1()}
-            {currentStep === 2 && renderStep2()}
-            {currentStep === 3 && renderStep3()}
-            {currentStep === 4 && renderStep4()}
-            {currentStep === 5 && renderStep5()}
+            {currentStep === 1 && <StepOne handleNext={handleNext} formData={formData} updateFormData={updateFormData} errors={errors} />}
+
+
+            {currentStep === 2 && <StepTwo handleNext={handleNext} formData={formData} updateFormData={updateFormData} errors={errors} handleBack={handleBack} getProgressPercentage={getProgressPercentage} projectOptions={projectOptions} />}
+
+
+            {currentStep === 3 && <StepThree handleNext={handleNext} formData={formData} updateFormData={updateFormData} errors={errors} handleBack={handleBack} getProgressPercentage={getProgressPercentage} />}
+
+
+            {currentStep === 4 && <StepFour formData={formData} updateFormData={updateFormData} errors={errors} handleBack={handleBack} handlePhoneChange={handlePhoneChange} getProgressPercentage={getProgressPercentage} handleSubmit={handleSubmit} />}
+
+
+            {currentStep === 5 && <FinalStep />}
           </div>
         </div>
       </div>
