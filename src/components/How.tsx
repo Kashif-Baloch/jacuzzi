@@ -9,7 +9,7 @@ const How = () => {
                         aria-hidden="true"></span>
                     <div
                         className="w-14">
-                        <img src="pass.png" alt="" />
+                        <img src="/pass.png" alt="" />
                     </div>
                     <p>Get a Free Quote</p>
                 </li>
@@ -19,14 +19,14 @@ const How = () => {
                         aria-hidden="true"></span>
                     <div
                         className="w-14">
-                        <img src="calender.png" alt="" />
+                        <img src="/calender.png" alt="" />
                     </div>
                     <p className="text-center w-[120px]">Installation in as Little as One Day</p>
                 </li>
                 <li className="items-center gap-2 group relative flex lg:flex-col">
                     <div
                         className="w-14">
-                        <img src="heart.png" alt="" />
+                        <img src="/heart.png" alt="" />
                     </div>
                     <p>Installation</p>
                 </li>

@@ -383,13 +383,13 @@ const JacuzziForm: React.FC = () => {
               onClick={handleBack}
               className="flex-1 max-w-fit px-6 bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-3 rounded-lg transition-colors flex items-center justify-center"
             >
-              <img src="arrow.png" className='w-4' alt="" />
+              <img src="/arrow.png" className='w-4' alt="" />
             </button>
             <button
               onClick={handleSubmit}
               className="flex-1 bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 max-w-fit px-6 md:px-12 rounded-lg transition-colors flex items-center justify-center"
             >
-              GET QUOTE <span className="ml-2"><img src="arrow.png" className="w-4 invert rotate-180" alt="arrow" /></span>
+              GET QUOTE <span className="ml-2"><img src="/arrow.png" className="w-4 invert rotate-180" alt="arrow" /></span>
             </button>
           </div>
         </div>
@@ -488,13 +488,13 @@ const JacuzziForm: React.FC = () => {
               onClick={handleBack}
               className="flex-1 max-w-fit px-6 bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-3 rounded-lg transition-colors flex items-center justify-center"
             >
-              <img src="arrow.png" className='w-4' alt="arrow" />
+              <img src="/arrow.png" className='w-4' alt="arrow" />
             </button>
             <button
               onClick={handleNext}
               className="flex-1 bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 max-w-fit px-6 md:px-12 rounded-lg transition-colors flex items-center justify-center"
             >
-              NEXT <span className="ml-2"> <img src="arrow.png" className='w-4 rotate-180 invert' alt="arrow" /></span>
+              NEXT <span className="ml-2"> <img src="/arrow.png" className='w-4 rotate-180 invert' alt="arrow" /></span>
             </button>
           </div>
         </div>
@@ -556,13 +556,13 @@ const JacuzziForm: React.FC = () => {
             onClick={handleBack}
             className="flex-1 max-w-fit bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-3 px-6 rounded-lg transition-colors flex items-center justify-center"
           >
-            <img className="w-4" src="arrow.png" alt="arrow" />
+            <img className="w-4" src="/arrow.png" alt="arrow" />
           </button>
           <button
             onClick={handleNext}
             className="flex-1 max-w-fit px-6 md:px-12 bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 rounded-lg transition-colors flex items-center justify-center"
           >
-            NEXT <span className="ml-2"><img className="rotate-180 w-4 invert" src="arrow.png" alt="arrow" /></span>
+            NEXT <span className="ml-2"><img className="rotate-180 w-4 invert" src="/arrow.png" alt="arrow" /></span>
           </button>
         </div>
       </div>
@@ -607,7 +607,7 @@ const JacuzziForm: React.FC = () => {
       <div className="max-w-6xl mx-auto px-4">
         <div className="flex flex-col lg:flex-row items-center lg:items-start gap-6 justify-center">
           <div className="flex flex-col bg-white items-center h-[430px] w-[246px]">
-            <img src="women.png" alt="Women" />
+            <img src="/women.png" alt="Women" />
             <h2 className='text-[25px] mt-2 text-[#00667F]'>Christina Haack</h2>
             <p className='text-sm text-gray-700'>Renovation Expert</p>
           </div>

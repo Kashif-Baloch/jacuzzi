@@ -2,10 +2,10 @@ import JacuzziForm from "./Form"
 
 const Hero = () => {
     return (
-        <section className="relative bg-[url('hero.png')] bg-no-repeat bg-cover z-10 pb-14">
+        <section className="relative bg-[url('/hero.png')] bg-no-repeat bg-cover z-10 pb-14">
             <div className="container flex items-center justify-center flex-col max-w-6xl mx-auto px-4">
                 <div className="mt-7">
-                    <img className="w-[200px]" src="logo.webp" alt="logo" />
+                    <img className="w-[200px]" src="/logo.webp" alt="logo" />
                 </div>
                 <div className="mt-16">
                     <h1 className="text-4xl uppercase font-thin">Your bathroom project</h1>
