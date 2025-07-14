@@ -13,7 +13,7 @@ const StepThree = ({ handleNext, formData, updateFormData, errors, handleBack, g
                     <span>YOUR PROGRESS</span>
                     <span>{getProgressPercentage?.()}%</span>
                 </div>
-                <div className="w-full bg-teal-400 rounded-full h-2">
+                <div className="w-full bg-blue-100 rounded-full h-2">
                     <div
                         className="bg-[#00667F] h-2 rounded-full transition-all duration-300"
                         style={{ width: `${getProgressPercentage?.()}%` }}
@@ -23,7 +23,7 @@ const StepThree = ({ handleNext, formData, updateFormData, errors, handleBack, g
 
             <div className="p-8">
                 <div className="mb-6">
-                    <h3 className="text-xl font-semibold mb-2">Congratulations!</h3>
+                    <h3 className="text-xl font-semibold mb-2 text-[#00667F]">Congratulations!</h3>
                     <p className="text-gray-600 text-sm">We've got a bath remodel quote ready for you in Chicago!</p>
                     <p className="text-gray-600 text-sm">Enter your information to get your quote:</p>
                 </div>
@@ -89,7 +89,7 @@ const StepThree = ({ handleNext, formData, updateFormData, errors, handleBack, g
                         </button>
                         <button
                             onClick={handleNext}
-                            className="flex-1 bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 max-w-fit px-6 md:px-12 rounded-lg transition-colors flex items-center justify-center"
+                            className="flex-1 bg-orange-400 hover:bg-orange-500  text-white font-semibold py-3 max-w-fit px-6 md:px-12 rounded-lg transition-colors flex items-center justify-center"
                         >
                             NEXT <span className="ml-2"> <img src="/arrow.png" className='w-4 rotate-180 invert' alt="arrow" /></span>
                         </button>
@@ -97,7 +97,7 @@ const StepThree = ({ handleNext, formData, updateFormData, errors, handleBack, g
                 </div>
 
                 <div className="mt-6 text-center">
-                    <p className="text-sm text-gray-600 italic">Encrypted form, free and competitive quote</p>
+                    <p className="text-sm text-gray-600 font-bold italic">Encrypted form, free and competitive quote</p>
                 </div>
             </div>
         </div>

@@ -12,7 +12,7 @@ const StepTwo = ({ handleNext, formData, updateFormData, errors, handleBack, get
                     <span>YOUR PROGRESS</span>
                     <span>{getProgressPercentage?.()}%</span>
                 </div>
-                <div className="w-full bg-teal-400 rounded-full h-2">
+                <div className="w-full bg-blue-100 rounded-full h-2">
                     <div
                         className="bg-[#00667F] h-2 rounded-full transition-all duration-300"
                         style={{ width: `${getProgressPercentage?.()}%` }}
@@ -30,15 +30,20 @@ const StepTwo = ({ handleNext, formData, updateFormData, errors, handleBack, get
                         <div key={option.id} className="relative">
                             <button
                                 onClick={() => updateFormData('projectType', option.id)}
-                                className={`w-full p-4 text-left rounded-lg border-2 transition-colors flex items-center justify-between ${(formData.projectType === option.id || (index === 0 && !formData.projectType))
+                                className={`w-full p-4 text-left rounded-lg border-2 transition-colors flex items-center gap-4 ${(formData.projectType === option.id || (index === 0 && !formData.projectType))
                                     ? 'bg-[#00667F] text-white border-[#00667F]'
                                     : 'bg-blue-50 text-gray-700 border-blue-200 hover:border-blue-300'
                                     }`}
                             >
-                                <span className="font-medium">{option.label}</span>
-                                {(formData.projectType === option.id || (index === 0 && !formData.projectType)) && (
+                                {(formData.projectType === option.id || (index === 0 && !formData.projectType)) ? (
                                     <span className="text-white">✓</span>
-                                )}
+                                ) :
+                                    (
+                                        <span className="border border-[#00667F] rounded-full w-3 h-3 flex items-center justify-center">
+                                        </span>
+                                    )
+                                }
+                                <span className="font-medium">{option.label}</span>
                             </button>
                         </div>
                     ))}
@@ -55,7 +60,7 @@ const StepTwo = ({ handleNext, formData, updateFormData, errors, handleBack, get
                     </button>
                     <button
                         onClick={handleNext}
-                        className="flex-1 max-w-fit px-6 md:px-12 bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 rounded-lg transition-colors flex items-center justify-center"
+                        className="flex-1 max-w-fit px-6 md:px-12 bg-orange-400 hover:bg-orange-500  text-white font-semibold py-3 rounded-lg transition-colors flex items-center justify-center"
                     >
                         NEXT <span className="ml-2"><img className="rotate-180 w-4 invert" src="/arrow.png" alt="arrow" /></span>
                     </button>

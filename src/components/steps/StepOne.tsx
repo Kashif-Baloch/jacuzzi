@@ -39,17 +39,19 @@ const StepOne = ({ handleNext, formData, updateFormData, errors }: DataState) =>
 
                     <button
                         onClick={handleNext}
-                        className="w-auto bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 px-12 rounded-lg transition-colors flex items-center justify-center"
+                        className="w-auto bg-orange-400 hover:bg-orange-500  text-white font-semibold py-3 px-12 rounded-lg transition-colors flex items-center justify-center"
                     >
-                        GO <span className="ml-2">→</span>
+                        GO <span className="ml-2">
+                            <img src="arrow.png" className="w-4 rotate-180 invert" alt="" />
+                        </span>
                     </button>
                 </div>
 
                 <div className="mt-6 text-center border-t border-gray-300">
                     <div className="p-4 rounded-lg">
                         <p className="text-2xl text-gray-800">Waiving All Installation Costs*</p>
-                        <div className="bg-blue-600 text-white text-xs px-2 py-[2px] rounded-full mt-1 inline-block">PLUS</div>
-                        <p className="text-sm text-gray-600 mt-2">No Interest and No Payments for up to 1 Year*</p>
+                        <div className="bg-[#00667F] text-white text-xs px-2 py-[1px] rounded-full mt-1 inline-block">PLUS</div>
+                        <p className="text-sm font-[500] text-gray-600 mt-2">No Interest and No Payments for up to 1 Year*</p>
                         <p className="text-xs text-gray-500 mt-1">*If paid in full by end of 12 months</p>
                     </div>
                 </div>

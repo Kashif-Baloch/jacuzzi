@@ -12,7 +12,7 @@ const StepFour = ({ handlePhoneChange, formData, updateFormData, errors, handleB
                     <span>YOUR PROGRESS</span>
                     <span>{getProgressPercentage?.()}%</span>
                 </div>
-                <div className="w-full bg-teal-400 rounded-full h-2">
+                <div className="w-full bg-blue-100 rounded-full h-2">
                     <div
                         className="bg-[#00667F] h-2 rounded-full transition-all duration-300"
                         style={{ width: `${getProgressPercentage?.()}%` }}
@@ -22,7 +22,7 @@ const StepFour = ({ handlePhoneChange, formData, updateFormData, errors, handleB
 
             <div className="p-8">
                 <div className="mb-6">
-                    <h3 className="text-xl font-semibold mb-2">Last Step!</h3>
+                    <h3 className="text-xl font-semibold mb-2 text-[#00667F]">Last Step!</h3>
                     <p className="text-gray-600 text-sm">Let us know how best to contact you with pricing details:</p>
                 </div>
 
@@ -61,7 +61,7 @@ const StepFour = ({ handlePhoneChange, formData, updateFormData, errors, handleB
                         </button>
                         <button
                             onClick={handleSubmit}
-                            className="flex-1 bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 max-w-fit px-6 md:px-12 rounded-lg transition-colors flex items-center justify-center"
+                            className="flex-1 bg-orange-400 hover:bg-orange-500 text-white font-semibold py-3 max-w-fit px-6 md:px-12 rounded-lg transition-colors flex items-center justify-center"
                         >
                             GET QUOTE <span className="ml-2"><img src="/arrow.png" className="w-4 invert rotate-180" alt="arrow" /></span>
                         </button>
@@ -69,7 +69,7 @@ const StepFour = ({ handlePhoneChange, formData, updateFormData, errors, handleB
                 </div>
 
                 <div className="mt-6 ">
-                    <p className="text-sm text-center text-gray-600 italic">Encrypted form, free and competitive quote</p>
+                    <p className="text-sm text-center text-gray-600 font-bold italic">Encrypted form, free and competitive quote</p>
                     <p className="text-xs text-gray-500 mt-3">
                         By clicking "Get Quote", you authorize Jacuzzi or one of its dealers to make marketing calls and texts to the phone number provided for a free estimate and to keep you informed about bath remodeling products and services. You understand they may use auto-dialer, AI, SMS messages, artificial and prerecorded voice messages to contact you. There is no requirement to purchase services. Please see our Privacy Policy and QuintStreet's Terms of Use and be aware that all calls are recorded for quality and safety purposes.
                     </p>

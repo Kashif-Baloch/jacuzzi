@@ -15,7 +15,7 @@ const FinalStep = () => {
                             It looks like you just submitted your information a moment ago.
                         </p>
 
-                        <button className="mt-5 bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors flex items-center justify-center w-[60%] mx-auto">
+                        <button className="mt-5 bg-orange-400 hover:bg-orange-500  text-white font-semibold py-3 px-6 rounded-lg transition-colors flex items-center justify-center w-[60%] mx-auto">
                             See Your Matches
                         </button>
                     </div>

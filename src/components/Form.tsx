@@ -42,7 +42,7 @@ const JacuzziForm: React.FC = () => {
     lastName: '',
     address: '',
     isHomeowner: false,
-    projectType: ''
+    projectType: 'bathtub-conversion'
   });
   const [errors, setErrors] = useState<FormErrors>({});
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -241,93 +241,10 @@ const JacuzziForm: React.FC = () => {
     }
   };
 
-  // const HandleSubmit = async () => {
-  //   setErrorMsg("");
-  //   try {
-  //     if (currentStep === 1 && fullName.length < 2) {
-  //       setErrorMsg("לפחות 2 תווים");
-  //       return;
-  //     }
-
-  //     if (currentStep === 5 && !regex.test(phoneNumber)) {
-  //       setErrorMsg("אנא הזמן מספר תקין");
-  //       return;
-  //     }
-
-  //     if (currentStep === 5 && !checkbox) {
-  //       setErrorMsg("אנא אשר את התנאים");
-  //       return;
-  //     }
-
-  //     setBtnLoading(true);
-
-  //     if (currentStep === 5) {
-  //       setIsLoading(true);
-
-  //       const payload = {
-  //         fullName,
-  //         income,
-  //         deficiencies,
-  //         otherProblemsPatientSuffers,
-  //         phoneNumber,
-  //         createdAt,
-  //         pageUrl: window.location.href,
-  //       };
-  //       console.log(payload);
-  //       await fetch(WEBHOOK_URL, {
-  //         method: "POST",
-  //         body: JSON.stringify(payload),
-  //       });
-  //       TagManager.dataLayer({
-  //         dataLayer: {
-  //           event: `registration_complete_ashdod-law-tax`,
-  //         },
-  //       });
-  //       localStorage.setItem(
-  //         "formdata",
-  //         JSON.stringify({
-  //           fullName,
-  //           income,
-  //           deficiencies,
-  //           phoneNumber,
-  //           otherProblemsPatientSuffers,
-  //           crime_record,
-  //           createdAt,
-  //           pageUrl: window.location.href,
-  //         })
-  //       );
-  //       // setTimeout(() => {
-  //       // }, 1000);
-  //     } else {
-  //       TagManager.dataLayer({
-  //         dataLayer: {
-  //           event: `step_${currentStep}_complete_ashdod-law-tax`,
-  //         },
-  //       });
-  //     }
-  //     setCurrentStep((prev) => prev + 1);
-  //   } catch (error) {
-  //     console.log("Error: ", error);
-  //     alert("something went wrong while sending data to api");
-  //   } finally {
-  //     setIsLoading(false);
-  //     setBtnLoading(false);
-  //   }
-  // };
-
   const handleSubmit = async (): Promise<void> => {
     if (validateStep(4)) {
       // Clear saved data on successful submission
       try {
-        // const payload = {
-        //         fullName,
-        //         income,
-        //         deficiencies,
-        //         otherProblemsPatientSuffers,
-        //         phoneNumber,
-        //         createdAt,
-        //         pageUrl: window.location.href,
-        //       };
         const payload = {
           zipCode: formData.zipCode,
           phoneNumber: formData.phoneNumber,
@@ -407,7 +324,7 @@ const JacuzziForm: React.FC = () => {
       <div className="max-w-6xl mx-auto px-4">
         <div className="flex flex-col lg:flex-row items-center lg:items-start gap-6 justify-center">
           <div className="flex flex-col bg-white items-center h-[430px] w-[246px]">
-            <img src="/women.png" alt="Women" />
+            <img src="/women.png" className='w-full' alt="Women" />
             <h2 className='text-[25px] mt-2 text-[#00667F]'>Christina Haack</h2>
             <p className='text-sm text-gray-700'>Renovation Expert</p>
           </div>
